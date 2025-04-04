@@ -3,12 +3,10 @@
 import grpc
 import warnings
 
-import gesture_recognition_pb2 as gesture__recognition__pb2
+import pose_pb2 as pose__pb2
 
-GRPC_GENERATED_VERSION = '1.64.1'
+GRPC_GENERATED_VERSION = '1.71.0'
 GRPC_VERSION = grpc.__version__
-EXPECTED_ERROR_RELEASE = '1.65.0'
-SCHEDULED_RELEASE_DATE = 'June 25, 2024'
 _version_not_supported = False
 
 try:
@@ -18,21 +16,17 @@ except ImportError:
     _version_not_supported = True
 
 if _version_not_supported:
-    warnings.warn(
+    raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + f' but the generated code in gesture_recognition_pb2_grpc.py depends on'
+        + f' but the generated code in pose_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
-        + f' This warning will become an error in {EXPECTED_ERROR_RELEASE},'
-        + f' scheduled for release on {SCHEDULED_RELEASE_DATE}.',
-        RuntimeWarning
     )
 
 
-class GestureRecognitionStub(object):
-    """The gesture recognition service definition.
-    """
+class MirrorStub(object):
+    """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
         """Constructor.
@@ -40,46 +34,43 @@ class GestureRecognitionStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.Recognition = channel.unary_unary(
-                '/GestureRecognition/Recognition',
-                request_serializer=gesture__recognition__pb2.RecognitionRequest.SerializeToString,
-                response_deserializer=gesture__recognition__pb2.RecognitionReply.FromString,
+        self.SkeletonFrame = channel.unary_unary(
+                '/pose.Mirror/SkeletonFrame',
+                request_serializer=pose__pb2.FrameRequest.SerializeToString,
+                response_deserializer=pose__pb2.FrameResponse.FromString,
                 _registered_method=True)
 
 
-class GestureRecognitionServicer(object):
-    """The gesture recognition service definition.
-    """
+class MirrorServicer(object):
+    """Missing associated documentation comment in .proto file."""
 
-    def Recognition(self, request, context):
-        """Sends an image
-        """
+    def SkeletonFrame(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_GestureRecognitionServicer_to_server(servicer, server):
+def add_MirrorServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'Recognition': grpc.unary_unary_rpc_method_handler(
-                    servicer.Recognition,
-                    request_deserializer=gesture__recognition__pb2.RecognitionRequest.FromString,
-                    response_serializer=gesture__recognition__pb2.RecognitionReply.SerializeToString,
+            'SkeletonFrame': grpc.unary_unary_rpc_method_handler(
+                    servicer.SkeletonFrame,
+                    request_deserializer=pose__pb2.FrameRequest.FromString,
+                    response_serializer=pose__pb2.FrameResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'GestureRecognition', rpc_method_handlers)
+            'pose.Mirror', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('GestureRecognition', rpc_method_handlers)
+    server.add_registered_method_handlers('pose.Mirror', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class GestureRecognition(object):
-    """The gesture recognition service definition.
-    """
+class Mirror(object):
+    """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def Recognition(request,
+    def SkeletonFrame(request,
             target,
             options=(),
             channel_credentials=None,
@@ -92,9 +83,9 @@ class GestureRecognition(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/GestureRecognition/Recognition',
-            gesture__recognition__pb2.RecognitionRequest.SerializeToString,
-            gesture__recognition__pb2.RecognitionReply.FromString,
+            '/pose.Mirror/SkeletonFrame',
+            pose__pb2.FrameRequest.SerializeToString,
+            pose__pb2.FrameResponse.FromString,
             options,
             channel_credentials,
             insecure,
