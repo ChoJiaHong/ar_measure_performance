@@ -32,3 +32,12 @@ async def send_request(stub):
     request = gesture_pb2.RecognitionRequest(image=image_base64)
     response = await stub.Recognition(request)
     return response
+
+if __name__ == "__main__":
+    stub = get_stub()
+    try:
+        # 測試呼叫
+        result = send_request(stub)
+        print("Object detection result:\n", result)
+    except grpc.RpcError as e:
+        print(f"gRPC 錯誤：{e.code()} - {e.details()}")

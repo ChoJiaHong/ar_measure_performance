@@ -13,7 +13,7 @@ import base64
 service_ip = "172.22.9.141"
 service_port = 30501
 service_url = f"{service_ip}:{service_port}"
-IMAGE_PATH='/home/hiro/git_repo/ar_measure_performance/gesture/1280hand.jpg'
+IMAGE_PATH='/home/hiro/git_repo/ar_measure_performance/gesture/1920x1080_hand.jpg'
 # 載入圖片一次即可重複使用
 with open(IMAGE_PATH, 'rb') as f:
     image_bytes = f.read()
