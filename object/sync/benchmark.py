@@ -92,4 +92,4 @@ def benchmark(n_requests=100, output_folder="./results/sync"):
     plt.show()
 
 if __name__ == '__main__':
-    benchmark(n_requests=100)
+    benchmark(n_requests=10000)

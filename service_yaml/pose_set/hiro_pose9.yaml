@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pose-9-30569
+  labels:
+    app: 
+spec:
+  nodeSelector: 
+      gpuNode: lab
+  containers:
+  - name: pose
+    image:  hiro08081/pose:4
+    readinessProbe:
+      tcpSocket:
+        port: 50052
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    ports:
+    - containerPort: 50052
+      hostPort: 30569
+    resources:
+      limits:
+        nvidia.com/gpu: 1

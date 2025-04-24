@@ -59,7 +59,7 @@ def benchmark(n_requests=100, output_folder="./results/sync"):
     os.makedirs(output_folder, exist_ok=True)
     filename = datetime.datetime.now().strftime("%m_%d_%H_%M_%S_%f")[:-3]
 
-    # 1️⃣ 輸出 CSV：詳細請求紀錄
+    #  輸出 CSV：詳細請求紀錄
     csv_path = os.path.join(output_folder, f"record_{filename}.csv")
     with open(csv_path, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
@@ -67,7 +67,7 @@ def benchmark(n_requests=100, output_folder="./results/sync"):
         for i in range(n_requests):
             writer.writerow([i, sending_time[i], recv_time[i], inference_time[i]])
 
-    # 2️⃣ 輸出 TXT：總體摘要
+    # 輸出 TXT：總體摘要
     summary_path = os.path.join(output_folder, f"summary_{filename}.txt")
     with open(summary_path, 'w') as f:
         f.write(f"requests         : {n_requests}\n")
@@ -80,7 +80,7 @@ def benchmark(n_requests=100, output_folder="./results/sync"):
         f.write(f"avg              : {avg_val:.4f}\n")
         f.write(f"std              : {std_val:.4f}\n")
 
-    # 3️⃣ 畫圖
+    #  畫圖
     x = np.linspace(0, n_requests - 1, n_requests)
     plt.plot(x, inference_time, color='blue')
     plt.title("Sync Inference Time per Request")

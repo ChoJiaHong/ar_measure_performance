@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pose-14-30574
+  labels:
+    app: pose-server
+spec:
+  hostPID: true                              # 讓容器可見 Host 的 PID namespace（可選）
+  securityContext:
+    seccompProfile:
+      type: Unconfined                       # 關閉 seccomp 限制
+  nodeSelector:
+    gpuNode: lab
+  volumes:
+    - name: debugfs
+      hostPath:
+        path: /sys/kernel/debug               # 掛載主機 debugfs
+        type: Directory
+  containers:
+    - name: pose
+      image: hiro08081/pose_env:3
+      command: ["sleep", "infinity"]
+      securityContext:
+        privileged: true                       # 或改成只加 SYS_ADMIN 能力：
+        # capabilities:
+        #   add: ["SYS_ADMIN"]
+      volumeMounts:
+        - name: debugfs
+          mountPath: /sys/kernel/debug
+      readinessProbe:
+        tcpSocket:
+          port: 50052
+        initialDelaySeconds: 5
+        periodSeconds: 5
+      ports:
+        - containerPort: 50052
+          hostPort: 30574
+      resources:
+        limits:
+          nvidia.com/gpu: 1

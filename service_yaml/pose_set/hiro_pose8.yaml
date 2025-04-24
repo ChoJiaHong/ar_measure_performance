@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pose-cuda-30568
+  labels:
+    app: 
+spec:
+  nodeSelector: 
+      gpuNode: lab
+  containers:
+  - name: pose
+    image:  hiro08081/pose:cuda
+    readinessProbe:
+      tcpSocket:
+        port: 50052
+      initialDelaySeconds: 5
+      periodSeconds: 5
+    ports:
+    - containerPort: 50052
+      hostPort: 30568
+    resources:
+      limits:
+        nvidia.com/gpu: 1
