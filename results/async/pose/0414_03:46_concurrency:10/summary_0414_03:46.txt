@@ -1,0 +1,9 @@
+requests         : 10
+successes        : 7819
+total_time       : 63.085550 s
+average_time     : 6.308555 s
+qps              : 123.94
+min              : 0.0350
+max              : 0.1078
+avg              : 0.0805
+std              : 0.0019

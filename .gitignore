@@ -1,1 +1,4 @@
-./results
+./results/
+./gesture/results/
+./object/results/
+./pose/results/
